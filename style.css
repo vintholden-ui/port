@@ -1,0 +1,305 @@
+/* =========================================================
+   PORTFOLIO STYLESHEET
+   This one file controls every page. Edit colors/fonts here
+   and it changes everywhere at once.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap');
+
+/* ---------------------------------------------------------
+   WORDMARK FONT — Gloucester MT Extra Condensed
+   This is a licensed Monotype font (it ships with MS Office
+   on most Mac/PC installs) — it can't be pulled from a free
+   font CDN the way Fraunces/Inter above can.
+
+   If you own it: find the font file on your computer (see
+   README.txt for exactly where to look), rename it to
+   match one of the filenames below, and drop it in the
+   /fonts folder. The site will pick it up automatically —
+   nothing else to change.
+
+   Until then, the wordmark falls back to a condensed serif
+   that's a reasonable stand-in.
+   --------------------------------------------------------- */
+@font-face {
+  font-family: 'Gloucester MT Extra Condensed';
+  src: url('fonts/GloucesterMTExtraCondensed.woff2') format('woff2'),
+       url('fonts/GloucesterMTExtraCondensed.ttf') format('truetype'),
+       url('fonts/GloucesterMTExtraCondensed.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --grey: #8a8a8a;
+  --line: #e7e7e7;
+  --gap: 24px;
+  --max-width: 1400px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+  padding: 48px 64px 96px;
+}
+
+@media (max-width: 700px) {
+  body { padding: 28px 20px 64px; }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Header / Nav ---------- */
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: var(--max-width);
+  margin: 0 auto 72px;
+}
+
+.wordmark {
+  font-family: 'Gloucester MT Extra Condensed', 'Bell MT', Georgia, 'Times New Roman', serif;
+  font-stretch: condensed;
+  font-size: 40px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 40px;
+  font-size: 17px;
+  margin-top: 8px;
+}
+
+.site-nav a {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.site-nav a.active::after,
+.site-nav a:hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .site-header { flex-direction: column; gap: 20px; }
+  .site-nav { gap: 24px; }
+}
+
+/* ---------- Work grid (index.html) ---------- */
+
+.work-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+@media (max-width: 800px) {
+  .work-grid { grid-template-columns: 1fr; }
+}
+
+.work-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.work-tile img,
+.work-tile video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.work-tile:hover img,
+.work-tile:hover video {
+  transform: scale(1.03);
+}
+
+.work-tile .tile-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+}
+
+.work-tile:hover .tile-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tile-label .tag {
+  color: rgba(255,255,255,0.7);
+}
+
+/* placeholder look for tiles with no image yet */
+.work-tile.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.work-tile.placeholder .plus {
+  color: rgba(255,255,255,0.55);
+  font-size: 20px;
+}
+
+/* ---------- About page ---------- */
+
+.about-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.about-wrap h1 {
+  font-family: 'Gloucester MT Extra Condensed', 'Bell MT', Georgia, 'Times New Roman', serif;
+  font-stretch: condensed;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+.about-wrap p {
+  font-size: 18px;
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.contact-list {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 16px;
+}
+
+/* ---------- Project page ---------- */
+
+.project-header {
+  max-width: var(--max-width);
+  margin: 0 auto 56px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 32px;
+  font-size: 15px;
+  color: var(--grey);
+}
+
+.back-link:hover { color: var(--ink); }
+
+.project-title {
+  font-family: 'Gloucester MT Extra Condensed', 'Bell MT', Georgia, 'Times New Roman', serif;
+  font-stretch: condensed;
+  font-size: 46px;
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+.project-meta {
+  color: var(--grey);
+  font-size: 16px;
+}
+
+.project-media {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.project-description {
+  max-width: 720px;
+  font-size: 18px;
+  line-height: 1.65;
+  margin-top: 24px;
+}
+
+/*
+  Every image/video sits in a frame capped at 78% of the screen's
+  height. Landscape images fill the width as before (just slightly
+  reined in); portrait images now stop well short of a full page
+  instead of running on for several scrolls. Both are centered.
+*/
+.media-frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 78vh;
+  background: transparent;
+}
+
+.media-frame img,
+.media-frame video {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 78vh;
+  object-fit: contain;
+}
+
+.project-nav {
+  max-width: var(--max-width);
+  margin: 64px auto 0;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+}
+
+.project-nav .disabled {
+  color: var(--grey);
+  cursor: default;
+  pointer-events: none;
+}
+
+.about-photo {
+  width: 100%;
+  max-width: 420px;
+  display: block;
+  margin: 0 auto 40px;
+}
